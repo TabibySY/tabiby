@@ -57,7 +57,6 @@
       transform: scale(1.05);
     }
 
-    /* ✨ تأثير النبض للزر */
     @keyframes pulse {
       0% { box-shadow: 0 0 0 0 rgba(40,167,69, 0.6); }
       70% { box-shadow: 0 0 0 15px rgba(40,167,69, 0); }
@@ -79,28 +78,50 @@
       font-weight: bold;
     }
 
-    /* سلايدر الصور */
+    /* السلايدر */
     .slider {
       position: relative;
-      max-width: 350px;
-      margin: 40px auto;
+      width: 90%;
+      max-width: 320px;
+      height: 250px;
+      margin: 30px auto;
       overflow: hidden;
-      border-radius: 20px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      border-radius: 15px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
     }
 
     .slides {
       display: flex;
       transition: transform 1s ease-in-out;
-      width: 100%;
     }
 
     .slides img {
       width: 100%;
-      border-radius: 20px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 15px;
     }
 
-    /* قسم المميزات */
+    .dots {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin: 0 5px;
+      background-color: #ccc;
+      border-radius: 50%;
+      transition: background-color 0.3s;
+    }
+
+    .dot.active {
+      background-color: #28a745;
+    }
+
+    /* المميزات */
     .features {
       background-color: #e9f7ef;
       padding: 40px 20px;
@@ -118,7 +139,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       font-size: 18px;
       color: #333;
     }
@@ -135,10 +156,6 @@
       padding: 20px;
       background: rgba(255, 255, 255, 0.85);
       border-top: 2px solid #cce3de;
-    }
-
-    footer .social {
-      margin-bottom: 10px;
     }
 
     footer .social a {
@@ -165,160 +182,56 @@
     <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/logo.jpg" alt="شعار طبيبي">
     <h1>مرحبًا بك في تطبيق طبيبي</h1>
     <p class="description">
-      طبيبي هو تطبيق طبي سوري يتيح لك حجز المواعيد بسهولة مع الأطباء في مختلف المحافظات. 
-      يمكنك استعراض قائمة الأطباء حسب التخصص والموقع، قراءة المقالات الطبية، 
-      والاطلاع على الإعلانات الصحية لتبقى على اطلاع دائم وتوفر وقتك وجهدك في البحث عن الطبيب المناسب.
+      طبيبي هو تطبيق طبي سوري يساعدك على حجز المواعيد بسهولة مع الأطباء في مختلف المحافظات السورية.  
+      يمكنك تصفح التخصصات، قراءة المقالات الطبية، ومتابعة الإعلانات الصحية بسهولة وأمان.
     </p>
   </header>
 
-  <a href="https://raw.githubusercontent.com/TabibySY/tabiby/main/apk.apk" 
-     download class="download-btn">
-     تحميل تطبيق طبيبي
+  <a href="https://raw.githubusercontent.com/TabibySY/tabiby/main/apk.apk" download class="download-btn">
+    تحميل تطبيق طبيبي
   </a>
 
   <div class="support">
-    <p>في حال واجهت أي مشكلة في التحميل، يمكنك التواصل مع الدعم مباشرة عبر:</p>
-    <p>
-      <i class="fab fa-whatsapp" style="color:#25D366;"></i>
-      <a href="https://wa.me/963988343069" target="_blank">واتساب: 0988343069</a>
-    </p>
-    <p>
-      <i class="fas fa-envelope" style="color:#007bff;"></i>
-      <a href="mailto:tbyby229@gmail.com">tbyby229@gmail.com</a>
-    </p>
+    <p>للدعم أو المساعدة:</p>
+    <p><i class="fab fa-whatsapp" style="color:#25D366;"></i> 
+      <a href="https://wa.me/963988343069" target="_blank">واتساب: 0988343069</a></p>
+    <p><i class="fas fa-envelope" style="color:#007bff;"></i> 
+      <a href="mailto:tbyby229@gmail.com">tbyby229@gmail.com</a></p>
   </div>
-<!-- سلايدر الصور -->
-<style>
-  .slider {
-    position: relative;
-    width: 90%;
-    max-width: 300px;
-    margin: 30px auto;
-    overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    height: 250px;
-  }
 
-  .slides {
-    display: flex;
-    width: calc(100% * 9);
-    animation: slideAnimation 36s infinite;
-  }
-
-  .slides img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 12px;
-  }
-
-  @keyframes slideAnimation {
-    0%, 11% { transform: translateX(0%); }
-    12.5%, 23.5% { transform: translateX(-100%); }
-    25%, 36% { transform: translateX(-200%); }
-    37.5%, 48.5% { transform: translateX(-300%); }
-    50%, 61% { transform: translateX(-400%); }
-    62.5%, 73.5% { transform: translateX(-500%); }
-    75%, 86% { transform: translateX(-600%); }
-    87.5%, 98.5% { transform: translateX(-700%); }
-    100% { transform: translateX(-800%); }
-  }
-
-  /* النقاط السفلية */
-  .dots {
-    text-align: center;
-    margin-top: 10px;
-  }
-
-  .dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    margin: 0 4px;
-    background-color: #ccc;
-    border-radius: 50%;
-    transition: background-color 0.3s;
-  }
-
-  .dot.active {
-    background-color: #28a745;
-  }
-
-  @media (max-width: 480px) {
-    .slider {
-      max-width: 90%;
-      height: 200px;
-    }
-  }
-</style>
-  
- <h2>لقطات من التطبيق</h2>
-
-  <!-- عرض الشرائح بتأثير Fade -->
-  <div class="slider" id="slider">
-    <div class="slide active">
-    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot1.jpg" alt="تسجيل الدخول">
-      </div>
-        <div class="slide">
-    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot2.jpg" alt="إنشاء حساب">
-        </div>
-              <div class="slide">
-    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot3.jpg" alt="مقالات طبية">
-                </div>
-                    <div class="slide">
-    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot4.jpg" alt="اختيار المحافظة">
-</div>
-                       <div class="slide">
-    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot5.jpg" alt="اختيار الطبيب">
-</div>
-                                <div class="slide">
-    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot6.jpg" alt="موعد الحجز">
-</div>
-                                      <div class="slide">
-    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot7.jpg" alt="الحجوزات الحالية">
-</div>
-                                            <div class="slide">
-    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot8.jpg" alt="الحجوزات السابقة">
-</div>
-                                                  <div class="slide">
-    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot9.jpg" alt="الإعدادات">
+  <!-- السلايدر -->
+  <div class="slider">
+    <div class="slides" id="slides">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot1.jpg" alt="تسجيل الدخول">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot2.jpg" alt="إنشاء حساب">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot3.jpg" alt="مقالات طبية">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot4.jpg" alt="اختيار المحافظة">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot5.jpg" alt="اختيار الطبيب">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot6.jpg" alt="موعد الحجز">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot7.jpg" alt="الحجوزات الحالية">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot8.jpg" alt="الحجوزات السابقة">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot9.jpg" alt="الإعدادات">
+    </div>
   </div>
-        <button class="slider-btn prev" onclick="changeSlide(-1)">&#10094;</button>
-    <button class="slider-btn next" onclick="changeSlide(1)">&#10095;</button>
-</div>
 
-<div class="dots" id="dots">
-  <span class="dot active"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-</div>
+  <div class="dots" id="dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
 
-<script>
-  // تحريك النقاط حسب الصورة المعروضة
-  const dots = document.querySelectorAll('.dot');
-  let index = 0;
-
-  setInterval(() => {
-    dots.forEach(dot => dot.classList.remove('active'));
-    dots[index].classList.add('active');
-    index = (index + 1) % dots.length;
-  }, 4000); // كل 4 ثواني تنتقل للنقطة التالية
-</script>
-
-  <!-- قسم المميزات -->
   <section class="features">
     <h2>مميزات تطبيق طبيبي</h2>
-    <div class="feature-item"><i class="fas fa-calendar-check"></i> حجز المواعيد بسهولة وسرعة.</div>
-    <div class="feature-item"><i class="fas fa-user-md"></i> اختيار الطبيب حسب المحافظة والتخصص.</div>
-    <div class="feature-item"><i class="fas fa-bell"></i> تنبيهات وتذكيرات بمواعيدك القادمة.</div>
-    <div class="feature-item"><i class="fas fa-notes-medical"></i> مقالات طبية وإعلانات صحية مفيدة.</div>
+    <div class="feature-item"><i class="fas fa-calendar-check"></i> حجز المواعيد بسرعة وسهولة.</div>
+    <div class="feature-item"><i class="fas fa-user-md"></i> اختيار الطبيب حسب التخصص والمحافظة.</div>
+    <div class="feature-item"><i class="fas fa-bell"></i> تنبيهات وتذكيرات بمواعيدك.</div>
+    <div class="feature-item"><i class="fas fa-notes-medical"></i> مقالات طبية وإعلانات صحية يومية.</div>
 
     <a href="https://wa.me/963988343069" target="_blank" class="contact-btn">
       <i class="fab fa-whatsapp"></i> تواصل معنا الآن
@@ -334,19 +247,23 @@
   </footer>
 
   <script>
-    // كود السلايدر التلقائي
+    // حركة السلايدر التلقائية
     const slides = document.querySelector('.slides');
-    const images = document.querySelectorAll('.slides img');
+    const dots = document.querySelectorAll('.dot');
+    const total = dots.length;
     let index = 0;
 
-    function showNextSlide() {
-      index++;
-      if (index >= images.length) index = 0;
-      slides.style.transform = translateX(-${index * 100}%);
+    function nextSlide() {
+      index = (index + 1) % total;
+      slides.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach(dot => dot.classList.remove('active'));
+      dots[index].classList.add('active');
     }
 
-    setInterval(showNextSlide, 3000);
+    setInterval(nextSlide, 3000);
   </script>
 
 </body>
 </html>
+
+ 
