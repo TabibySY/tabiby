@@ -1,239 +1,246 @@
-
 <!DOCTYPE html>
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>تطبيق طبيبي</title>
-
-  <!-- مكتبة الأيقونات Font Awesome -->
+  <link rel="icon" href="https://raw.githubusercontent.com/TabibySY/tabiby/main/logo.jpg" type="image/jpg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     body {
-      font-family: sans-serif;
+      font-family: "Tajawal", sans-serif;
       direction: rtl;
       text-align: center;
-      background-color: #f9f9f9;
       margin: 0;
-      padding: 0;
+      background: linear-gradient(rgba(255,255,255,0.9), rgba(240,255,240,0.9)),
+                  url('https://img.freepik.com/free-photo/medical-banner-with-stethoscope_23-2149611199.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      color: #333;
+    }
+
+    header img {
+      width: 120px;
+      margin-top: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
 
     h1 {
-      color: #2c3e50;
+      color: #007f5f;
+      margin-top: 15px;
     }
 
-    a.download-btn {
+    p.description {
+      width: 90%;
+      max-width: 600px;
+      margin: 10px auto 30px;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    a.download-btn, a.contact-btn {
       display: inline-block;
       background-color: #28a745;
       color: white;
-      padding: 12px 24px;
+      padding: 12px 25px;
       border-radius: 8px;
       text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    a.download-btn:hover {
-      background-color: #218838;
-    }
-
-    .note {
-      margin-top: 20px;
-      font-size: 14px;
-      color: #555;
-    }
-
-    hr {
-      margin: 30px auto;
-      width: 60%;
-    }
-
-    /* ====== السلايدر ====== */
-    .slider {
-      position: relative;
-      max-width: 400px;
-      height: 720px;
-      margin: 30px auto;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    .slide {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-
-    .slide.active {
-      opacity: 1;
-    }
-
-    .slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .slider-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(0,0,0,0.4);
-      color: white;
-      border: none;
-      font-size: 24px;
-      padding: 8px 12px;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    .slider-btn:hover {
-      background-color: rgba(0,0,0,0.7);
-    }
-
-    .prev { left: 10px; }
-    .next { right: 10px; }
-
-    /* ====== النقاط ====== */
-    .dots {
-      text-align: center;
+      font-size: 18px;
+      transition: 0.3s;
       margin-top: 10px;
     }
 
-    .dot {
-      height: 12px;
-      width: 12px;
-      margin: 0 4px;
-      background-color: #bbb;
-      border-radius: 50%;
-      display: inline-block;
-      transition: background-color 0.3s;
-      cursor: pointer;
+    a.download-btn:hover, a.contact-btn:hover {
+      background-color: #218838;
+      transform: scale(1.05);
     }
 
-    .dot.active {
-      background-color: #28a745;
+    /* ✨ تأثير النبض للزر */
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(40,167,69, 0.6); }
+      70% { box-shadow: 0 0 0 15px rgba(40,167,69, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(40,167,69, 0); }
+    }
+
+    .contact-btn {
+      animation: pulse 3s infinite;
+    }
+
+    .support {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    .support a {
+      color: #007f5f;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* سلايدر الصور */
+    .slider {
+      position: relative;
+      max-width: 350px;
+      margin: 40px auto;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 1s ease-in-out;
+      width: 100%;
+    }
+
+    .slides img {
+      width: 100%;
+      border-radius: 20px;
+    }
+
+    /* قسم المميزات */
+    .features {
+      background-color: #e9f7ef;
+      padding: 40px 20px;
+      border-top: 2px solid #cce3de;
+      border-bottom: 2px solid #cce3de;
+    }
+
+    .features h2 {
+      color: #007f5f;
+      margin-bottom: 30px;
+      font-size: 24px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .feature-item i {
+      color: #28a745;
+      margin-left: 10px;
+      font-size: 22px;
+    }
+
+    /* الفوتر */
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.85);
+      border-top: 2px solid #cce3de;
+    }
+
+    footer .social {
+      margin-bottom: 10px;
+    }
+
+    footer .social a {
+      color: #007f5f;
+      font-size: 24px;
+      margin: 0 10px;
+      transition: 0.3s;
+    }
+
+    footer .social a:hover {
+      color: #25D366;
+    }
+
+    footer p {
+      font-size: 14px;
+      color: #555;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- شعار التطبيق -->
-  <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/images/logo.png" alt="شعار طبيبي" style="width:150px; margin-top:20px;">
+  <header>
+    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/logo.jpg" alt="شعار طبيبي">
+    <h1>مرحبًا بك في تطبيق طبيبي</h1>
+    <p class="description">
+      طبيبي هو تطبيق طبي سوري يتيح لك حجز المواعيد بسهولة مع الأطباء في مختلف المحافظات. 
+      يمكنك استعراض قائمة الأطباء حسب التخصص والموقع، قراءة المقالات الطبية، 
+      والاطلاع على الإعلانات الصحية لتبقى على اطلاع دائم وتوفر وقتك وجهدك في البحث عن الطبيب المناسب.
+    </p>
+  </header>
 
-  <h1>مرحبًا بك في تطبيق طبيبي</h1>
-
-  <p>اضغط على الزر أدناه لتحميل التطبيق:</p>
-
-  <!-- زر التحميل المباشر -->
-  <a href="https://raw.githubusercontent.com/TabibySY/tabiby/main/apk.apk" download class="download-btn">
-    تحميل تطبيق طبيبي
+  <a href="https://raw.githubusercontent.com/TabibySY/tabiby/main/apk.apk" 
+     download class="download-btn">
+     تحميل تطبيق طبيبي
   </a>
-<p style="margin-top:10px; font-size: 14px;">
-  إذا واجهت مشكلة في التحميل، الرجاء التواصل مع الدعم على 
-  <a href="https://wa.me/963988343069" target="_blank" style="color:#25D366; text-decoration:none; font-weight:bold;">
-    واتس أب
-  </a>.
-</p>
 
-
-  
+  <div class="support">
+    <p>في حال واجهت أي مشكلة في التحميل، يمكنك التواصل مع الدعم مباشرة عبر:</p>
+    <p>
+      <i class="fab fa-whatsapp" style="color:#25D366;"></i>
+      <a href="https://wa.me/963988343069" target="_blank">واتساب: 0988343069</a>
+    </p>
+    <p>
+      <i class="fas fa-envelope" style="color:#007bff;"></i>
+      <a href="mailto:tbyby229@gmail.com">tbyby229@gmail.com</a>
+    </p>
   </div>
 
-  <hr>
-
-  <h2>لقطات من التطبيق</h2>
-
-  <!-- عرض الشرائح بتأثير Fade -->
-  <div class="slider" id="slider">
-    <div class="slide active">
-      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/screenshot1.jpg" alt="تسجيل الدخول">
+  <!-- سلايدر الصور -->
+  <div class="slider">
+    <div class="slides">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot1.jpg" alt="تسجيل الدخول">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot2.jpg" alt="إنشاء حساب">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot3.jpg" alt="مقالات طبية">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot4.jpg" alt="اختيار المحافظة">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot5.jpg" alt="اختيار الطبيب">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot6.jpg" alt="موعد الحجز">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot7.jpg" alt="الحجوزات الحالية">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot8.jpg" alt="الحجوزات السابقة">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot9.jpg" alt="الإعدادات">
     </div>
-    <div class="slide">
-      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/screenshot2.jpg" alt="إنشاء حساب">
-    </div>
-    <div class="slide">
-      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/screenshot3.jpg" alt="مقالات طبية">
-    </div>
-    <div class="slide">
-      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/screenshot4.jpg" alt="الأطباء والمحافظات">
-    </div>
-    <div class="slide">
-      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/screenshot5.jpg" alt="قائمة الحجوزات">
-    </div>
-    <div class="slide">
-      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/screenshot6.jpg" alt="الإعدادات">
-    </div>
-
-    <button class="slider-btn prev" onclick="changeSlide(-1)">&#10094;</button>
-    <button class="slider-btn next" onclick="changeSlide(1)">&#10095;</button>
   </div>
 
-  <!-- النقاط -->
-  <div class="dots" id="dots"></div>
+  <!-- قسم المميزات -->
+  <section class="features">
+    <h2>مميزات تطبيق طبيبي</h2>
+    <div class="feature-item"><i class="fas fa-calendar-check"></i> حجز المواعيد بسهولة وسرعة.</div>
+    <div class="feature-item"><i class="fas fa-user-md"></i> اختيار الطبيب حسب المحافظة والتخصص.</div>
+    <div class="feature-item"><i class="fas fa-bell"></i> تنبيهات وتذكيرات بمواعيدك القادمة.</div>
+    <div class="feature-item"><i class="fas fa-notes-medical"></i> مقالات طبية وإعلانات صحية مفيدة.</div>
 
-  <hr>
-
-  <p>تابعنا على وسائل التواصل الاجتماعي:</p>
-
-  <div style="font-size: 18px;">
-    <a href="https://www.facebook.com/share/1BPYmKJrdX/" target="_blank" style="display:block; margin-bottom: 20px; color: #1877f2; text-decoration: none;">
-      <i class="fab fa-facebook"></i> Facebook
+    <a href="https://wa.me/963988343069" target="_blank" class="contact-btn">
+      <i class="fab fa-whatsapp"></i> تواصل معنا الآن
     </a>
+  </section>
 
-    <a href="https://www.instagram.com/tabiby_syr?igsh=YTRjYnFoZ2tqNzR6" target="_blank" style="display:block; margin-bottom: 20px; color: #e4405f; text-decoration: none;">
-      <i class="fab fa-instagram"></i> Instagram
-    </a>
-
-    <a href="https://wa.me/963988343069" target="_blank" style="display:block; margin-bottom: 20px; color: #25D366; text-decoration: none;">
-      <i class="fab fa-whatsapp"></i> WhatsApp
-    </a>
-  </div>
+  <footer>
+    <div class="social">
+      <a href="https://www.facebook.com/share/1BPYmKJrdX/" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://www.instagram.com/tabiby_syr?igsh=YTRjYnFoZ2tqNzR6" target="_blank" style="margin-right:20px;"><i class="fab fa-instagram"></i></a>
+    </div>
+    <p>جميع الحقوق محفوظة © 2025 تطبيق طبيبي</p>
+  </footer>
 
   <script>
-    const slides = document.querySelectorAll('.slide');
-    const dotsContainer = document.getElementById('dots');
+    // كود السلايدر التلقائي
+    const slides = document.querySelector('.slides');
+    const images = document.querySelectorAll('.slides img');
     let index = 0;
 
-    // إنشاء النقاط تلقائياً
-    slides.forEach((_, i) => {
-      const dot = document.createElement('span');
-      dot.classList.add('dot');
-      dot.addEventListener('click', () => showSlide(i));
-      dotsContainer.appendChild(dot);
-    });
-
-    const dots = document.querySelectorAll('.dot');
-
-    function showSlide(i) {
-      slides[index].classList.remove('active');
-      dots[index].classList.remove('active');
-      index = (i + slides.length) % slides.length;
-      slides[index].classList.add('active');
-      dots[index].classList.add('active');
+    function showNextSlide() {
+      index++;
+      if (index >= images.length) index = 0;
+      slides.style.transform = `translateX(-${index * 100}%)`;
     }
 
-    function changeSlide(step) {
-      showSlide(index + step);
-    }
-
-    function autoSlide() {
-      changeSlide(1);
-    }
-
-    // تفعيل أول نقطة وصورة
-    showSlide(0);
-
-    // التبديل التلقائي كل 3 ثوانٍ
-    setInterval(autoSlide, 3000);
+    setInterval(showNextSlide, 3000);
   </script>
 
 </body>
 </html>
+
 
 
