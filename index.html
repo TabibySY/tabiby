@@ -1,530 +1,331 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="تطبيق طبيبي - منصة سورية ذكية لتسهيل التواصل بين المرضى والأطباء وحجز المواعيد الطبية">
-  <title>تطبيق طبيبي - منصة طبية سورية</title>
+  <title>تطبيق طبيبي</title>
   <link rel="icon" href="https://raw.githubusercontent.com/TabibySY/tabiby/main/logo.jpg" type="image/jpg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- مكتبة AOS للتأثيرات -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
   <style>
-    :root {
-      --primary-color: #007f5f;
-      --secondary-color: #28a745;
-      --light-bg: #e8f8f1;
-      --text-color: #333;
-      --white: #ffffff;
-    }
-    
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    
     body {
       font-family: "Tajawal", sans-serif;
       direction: rtl;
       text-align: center;
       margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #f5f7fa 0%, #e8f8f1 100%);
-      color: var(--text-color);
-      line-height: 1.6;
-      min-height: 100vh;
+      background: linear-gradient(rgba(255,255,255,0.9), rgba(240,255,240,0.9)),
+                  url('https://img.freepik.com/free-photo/medical-banner-with-stethoscope_23-2149611199.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      color: #333;
     }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px 15px;
-    }
-
-    header {
-      padding: 20px 0;
-    }
-    
     header img {
       width: 120px;
-      height: 120px;
-      object-fit: cover;
       margin-top: 20px;
       border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,127,95,0.2);
-      animation: bounce 2s infinite;
-      border: 3px solid var(--primary-color);
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
 
     h1 {
-      color: var(--primary-color);
+      color: #007f5f;
       margin-top: 15px;
-      font-size: 2.2rem;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
-    .buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin: 40px 0;
+    p.description {
+      width: 90%;
+      max-width: 600px;
+      margin: 10px auto 30px;
+      font-size: 17px;
+      line-height: 1.7;
     }
-    
+
     a.download-btn, a.contact-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: linear-gradient(135deg, var(--secondary-color), #218838);
+      display: inline-block;
+      background-color: #28a745;
       color: white;
-      padding: 15px 30px;
-      border-radius: 12px;
+      padding: 12px 25px;
+      border-radius: 8px;
       text-decoration: none;
       font-size: 18px;
-      font-weight: 600;
-      box-shadow: 0 6px 15px rgba(40,167,69,0.4);
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-      min-width: 200px;
-      justify-content: center;
+      transition: 0.3s;
+      margin-top: 10px;
     }
 
     a.download-btn:hover, a.contact-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(40,167,69,0.6);
+      background-color: #218838;
+      transform: scale(1.05);
     }
 
-    .slider-container {
+    /* ✨ تأثير النبض للزر */
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(40,167,69, 0.6); }
+      70% { box-shadow: 0 0 0 15px rgba(40,167,69, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(40,167,69, 0); }
+    }
+
+    .contact-btn {
+      animation: pulse 3s infinite;
+    }
+
+    .support {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    .support a {
+      color: #007f5f;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* سلايدر الصور */
+    .slider {
       position: relative;
-      max-width: 400px;
-      margin: 50px auto;
+      max-width: 350px;
+      margin: 40px auto;
       overflow: hidden;
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      background: white;
-      border: 2px solid var(--light-bg);
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
     }
 
-    .slider {
+    .slides {
       display: flex;
-      transition: transform 0.5s ease-in-out;
+      transition: transform 1s ease-in-out;
       width: 100%;
     }
 
-    .slider img {
+    .slides img {
       width: 100%;
-      flex-shrink: 0;
-      border-radius: 18px;
-      object-fit: cover;
-      min-height: 250px;
-      background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
-      display: block;
-    }
-
-    .slider-nav {
-      position: absolute;
-      bottom: 20px;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      z-index: 10;
-    }
-
-    .slider-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background-color: rgba(255,255,255,0.6);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(255,255,255,0.8);
-    }
-
-    .slider-dot.active {
-      background-color: var(--white);
-      transform: scale(1.2);
-    }
-
-    .features, .about {
-      background: linear-gradient(135deg, var(--light-bg), #ffffff);
-      padding: 50px 30px;
-      margin: 50px auto;
       border-radius: 20px;
-      max-width: 800px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-      border: 1px solid rgba(0,127,95,0.1);
     }
 
-    .features h2, .about h2 {
-      color: var(--primary-color);
+    /* قسم المميزات */
+    .features {
+      background-color: #e9f7ef;
+      padding: 40px 20px;
+      border-top: 2px solid #cce3de;
+      border-bottom: 2px solid #cce3de;
+    }
+
+    .features h2 {
+      color: #007f5f;
       margin-bottom: 30px;
-      font-size: 28px;
-      position: relative;
-      display: inline-block;
-    }
-
-    .features h2::after, .about h2::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 3px;
-      background: var(--secondary-color);
-      border-radius: 2px;
+      font-size: 24px;
     }
 
     .feature-item {
-      margin: 20px auto;
-      font-size: 18px;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-      gap: 15px;
-      color: var(--text-color);
-      max-width: 500px;
-      padding: 10px;
-      border-radius: 10px;
-      transition: background-color 0.3s ease;
-    }
-
-    .feature-item:hover {
-      background-color: rgba(40,167,69,0.05);
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: #333;
     }
 
     .feature-item i {
-      color: var(--secondary-color);
-      font-size: 24px;
-      width: 35px;
-      text-align: center;
+      color: #28a745;
+      margin-left: 10px;
+      font-size: 22px;
     }
 
+    /* الفوتر */
     footer {
-      margin-top: 60px;
-      padding: 30px 20px;
-      background: linear-gradient(135deg, var(--white), var(--light-bg));
-      border-top: 3px solid var(--primary-color);
+      margin-top: 40px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.85);
+      border-top: 2px solid #cce3de;
     }
 
     footer .social {
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
-    
+
     footer .social a {
-      color: var(--primary-color);
-      font-size: 28px;
-      transition: all 0.3s ease;
-      background: white;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      color: #007f5f;
+      font-size: 24px;
+      margin: 0 10px;
+      transition: 0.3s;
     }
 
     footer .social a:hover {
-      color: var(--white);
-      background: var(--primary-color);
-      transform: translateY(-5px);
+      color: #25D366;
     }
 
     footer p {
-      font-size: 16px;
+      font-size: 14px;
       color: #555;
-      margin: 0;
-      font-weight: 500;
-    }
-
-    .loading-placeholder {
-      display: none;
-      text-align: center;
-      padding: 20px;
-      color: var(--primary-color);
-    }
-    
-    /* تحسينات للهواتف المحمولة */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-      
-      .buttons {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-      }
-      
-      a.download-btn, a.contact-btn {
-        width: 100%;
-        max-width: 300px;
-        padding: 12px 25px;
-        font-size: 16px;
-      }
-      
-      .feature-item {
-        justify-content: center;
-        text-align: center;
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .slider-container {
-        max-width: 320px;
-        margin: 30px auto;
-      }
-
-      .features, .about {
-        padding: 30px 20px;
-        margin: 30px auto;
-      }
-    }
-    
-    /* تحسينات إضافية للشاشات الصغيرة */
-    @media (max-width: 480px) {
-      header img {
-        width: 100px;
-        height: 100px;
-      }
-      
-      h1 {
-        font-size: 1.6rem;
-      }
-      
-      .features h2, .about h2 {
-        font-size: 24px;
-      }
-      
-      footer .social a {
-        width: 45px;
-        height: 45px;
-        font-size: 24px;
-      }
     }
   </style>
 </head>
+
 <body>
 
-  <div class="container">
-    <header data-aos="fade-down" data-aos-duration="1200">
-      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/logo.jpg" alt="شعار تطبيق طبيبي - منصة طبية سورية">
-      <h1>مرحبًا بك في تطبيق طبيبي</h1>
-    </header>
+  <header>
+    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/logo.jpg" alt="شعار طبيبي">
+    <h1>مرحبًا بك في تطبيق طبيبي</h1>
+    <p class="description">
+      طبيبي هو تطبيق طبي سوري يتيح لك حجز المواعيد بسهولة مع الأطباء في مختلف المحافظات. 
+      يمكنك استعراض قائمة الأطباء حسب التخصص والموقع، قراءة المقالات الطبية، 
+      والاطلاع على الإعلانات الصحية لتبقى على اطلاع دائم وتوفر وقتك وجهدك في البحث عن الطبيب المناسب.
+    </p>
+  </header>
 
-    <div class="buttons">
-      <a href="https://github.com/TabibySY/tabiby/raw/main/apk.apk" download class="download-btn" data-aos="zoom-in" data-aos-duration="1000">
-        <i class="fas fa-download"></i>
-        تحميل التطبيق
-      </a>
-      <a href="https://wa.me/963988343069" target="_blank" class="contact-btn" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
-        <i class="fab fa-whatsapp"></i>
-        تواصل معنا
-      </a>
-    </div>
+  <a href="https://raw.githubusercontent.com/TabibySY/tabiby/main/apk.apk" 
+     download class="download-btn">
+     تحميل تطبيق طبيبي
+  </a>
 
-    <div class="slider-container" data-aos="fade-up" data-aos-duration="1200">
-      <div class="slider" id="imageSlider">
-        <!-- الصور سيتم إضافتها ديناميكياً -->
-      </div>
-      <div class="slider-nav" id="sliderNav">
-        <!-- النقاط سيتم إضافتها ديناميكياً -->
-      </div>
-    </div>
-
-    <div class="loading-placeholder" id="loading">
-      <i class="fas fa-spinner fa-spin"></i>
-      <p>جاري تحميل المحتوى...</p>
-    </div>
-
-    <section class="about" data-aos="fade-right" data-aos-duration="1000">
-      <h2>من نحن</h2>
-      <p>
-        تطبيق طبيبي هو مبادرة سورية تهدف إلى تسهيل التواصل بين المرضى والأطباء من خلال منصة ذكية وآمنة. 
-        نسعى لتوفير تجربة مريحة تتيح للمستخدمين حجز المواعيد، متابعة مقالات طبية موثوقة، والاطلاع على أحدث الإعلانات الصحية بسهولة تامة.
-      </p>
-    </section>
-
-    <section class="features" data-aos="fade-left" data-aos-duration="1000">
-      <h2>مميزات تطبيق طبيبي</h2>
-      <div class="feature-item" data-aos="fade-up" data-aos-duration="800">
-        <i class="fas fa-calendar-check"></i>
-        <span>حجز المواعيد بسهولة وسرعة</span>
-      </div>
-      <div class="feature-item" data-aos="fade-up" data-aos-duration="900">
-        <i class="fas fa-user-md"></i>
-        <span>استعراض الأطباء حسب التخصص والمحافظة</span>
-      </div>
-      <div class="feature-item" data-aos="fade-up" data-aos-duration="1000">
-        <i class="fas fa-bell"></i>
-        <span>تنبيهات تلقائية لتذكيرك بالمواعيد</span>
-      </div>
-      <div class="feature-item" data-aos="fade-up" data-aos-duration="1100">
-        <i class="fas fa-newspaper"></i>
-        <span>مقالات وإعلانات طبية يومية</span>
-      </div>
-      <div class="feature-item" data-aos="fade-up" data-aos-duration="1200">
-        <i class="fas fa-heartbeat"></i>
-        <span>واجهة مريحة وسهلة الاستخدام</span>
-      </div>
-    </section>
-
-    <footer data-aos="fade-up" data-aos-duration="1000">
-      <div class="social">
-        <a href="https://www.facebook.com/share/1BPYmKJrdX/" target="_blank" aria-label="تابعنا على فيسبوك">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="https://www.instagram.com/tabiby_syr" target="_blank" aria-label="تابعنا على إنستغرام">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://github.com/TabibySY/tabiby" target="_blank" aria-label="زورنا على غيت هاب">
-          <i class="fab fa-github"></i>
-        </a>
-      </div>
-      <p>© 2025 جميع الحقوق محفوظة لتطبيق طبيبي</p>
-    </footer>
+  <div class="support">
+    <p>في حال واجهت أي مشكلة في التحميل، يمكنك التواصل مع الدعم مباشرة عبر:</p>
+    <p>
+      <i class="fab fa-whatsapp" style="color:#25D366;"></i>
+      <a href="https://wa.me/963988343069" target="_blank">واتساب: 0988343069</a>
+    </p>
+    <p>
+      <i class="fas fa-envelope" style="color:#007bff;"></i>
+      <a href="mailto:tbyby229@gmail.com">tbyby229@gmail.com</a>
+    </p>
   </div>
+<!-- سلايدر الصور -->
+<style>
+  .slider {
+    position: relative;
+    width: 90%;
+    max-width: 300px;
+    margin: 30px auto;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    height: 250px;
+  }
 
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  .slides {
+    display: flex;
+    width: calc(100% * 9);
+    animation: slideAnimation 36s infinite;
+  }
+
+  .slides img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  @keyframes slideAnimation {
+    0%, 11% { transform: translateX(0%); }
+    12.5%, 23.5% { transform: translateX(-100%); }
+    25%, 36% { transform: translateX(-200%); }
+    37.5%, 48.5% { transform: translateX(-300%); }
+    50%, 61% { transform: translateX(-400%); }
+    62.5%, 73.5% { transform: translateX(-500%); }
+    75%, 86% { transform: translateX(-600%); }
+    87.5%, 98.5% { transform: translateX(-700%); }
+    100% { transform: translateX(-800%); }
+  }
+
+  /* النقاط السفلية */
+  .dots {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin: 0 4px;
+    background-color: #ccc;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+  }
+
+  .dot.active {
+    background-color: #28a745;
+  }
+
+  @media (max-width: 480px) {
+    .slider {
+      max-width: 90%;
+      height: 200px;
+    }
+  }
+</style>
+  
+<div class="slider">
+  <div class="slides" id="slides">
+    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot1.jpg" alt="تسجيل الدخول">
+    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot2.jpg" alt="إنشاء حساب">
+    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot3.jpg" alt="مقالات طبية">
+    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot4.jpg" alt="اختيار المحافظة">
+    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot5.jpg" alt="اختيار الطبيب">
+    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot6.jpg" alt="موعد الحجز">
+    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot7.jpg" alt="الحجوزات الحالية">
+    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot8.jpg" alt="الحجوزات السابقة">
+    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot9.jpg" alt="الإعدادات">
+  </div>
+</div>
+
+<div class="dots" id="dots">
+  <span class="dot active"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+</div>
+
+<script>
+  // تحريك النقاط حسب الصورة المعروضة
+  const dots = document.querySelectorAll('.dot');
+  let index = 0;
+
+  setInterval(() => {
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[index].classList.add('active');
+    index = (index + 1) % dots.length;
+  }, 4000); // كل 4 ثواني تنتقل للنقطة التالية
+</script>
+
+  <!-- قسم المميزات -->
+  <section class="features">
+    <h2>مميزات تطبيق طبيبي</h2>
+    <div class="feature-item"><i class="fas fa-calendar-check"></i> حجز المواعيد بسهولة وسرعة.</div>
+    <div class="feature-item"><i class="fas fa-user-md"></i> اختيار الطبيب حسب المحافظة والتخصص.</div>
+    <div class="feature-item"><i class="fas fa-bell"></i> تنبيهات وتذكيرات بمواعيدك القادمة.</div>
+    <div class="feature-item"><i class="fas fa-notes-medical"></i> مقالات طبية وإعلانات صحية مفيدة.</div>
+
+    <a href="https://wa.me/963988343069" target="_blank" class="contact-btn">
+      <i class="fab fa-whatsapp"></i> تواصل معنا الآن
+    </a>
+  </section>
+
+  <footer>
+    <div class="social">
+      <a href="https://www.facebook.com/share/1BPYmKJrdX/" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://www.instagram.com/tabiby_syr?igsh=YTRjYnFoZ2tqNzR6" target="_blank" style="margin-right:20px;"><i class="fab fa-instagram"></i></a>
+    </div>
+    <p>جميع الحقوق محفوظة © 2025 تطبيق طبيبي</p>
+  </footer>
+
   <script>
-    // قائمة الصور من مستودع GitHub
-    const imageUrls = [
-      'https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot1.jpg',
-      'https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot2.jpg',
-      'https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot3.jpg',
-      'https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot4.jpg',
-      'https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot5.jpg',
-      'https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot6.jpg',
-      'https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot7.jpg'
-    ];
+    // كود السلايدر التلقائي
+    const slides = document.querySelector('.slides');
+    const images = document.querySelectorAll('.slides img');
+    let index = 0;
 
-    const altTexts = [
-      'تسجيل الدخول في تطبيق طبيبي',
-      'إنشاء حساب جديد في تطبيق طبيبي',
-      'مقالات طبية في تطبيق طبيبي',
-      'اختيار المحافظة في تطبيق طبيبي',
-      'اختيار الطبيب في تطبيق طبيبي',
-      'موعد الحجز في تطبيق طبيبي',
-      'الحجوزات الحالية في تطبيق طبيبي'
-    ];
-
-    document.addEventListener('DOMContentLoaded', function() {
-      // تهيئة مكتبة AOS
-      AOS.init({
-        once: true,
-        offset: 100,
-        duration: 800
-      });
-
-      // تحميل الصور ديناميكياً
-      loadSliderImages();
-      
-      // بدء السلايدر بعد تحميل الصور
-      setTimeout(initializeSlider, 1000);
-    });
-
-    function loadSliderImages() {
-      const slider = document.getElementById('imageSlider');
-      const loading = document.getElementById('loading');
-      
-      if (!slider) return;
-      
-      loading.style.display = 'block';
-      
-      let loadedCount = 0;
-      const totalImages = imageUrls.length;
-      
-      imageUrls.forEach((url, index) => {
-        const img = new Image();
-        img.src = url;
-        img.alt = altTexts[index] || صورة ${index + 1} من تطبيق طبيبي;
-        img.onload = () => {
-          loadedCount++;
-          if (loadedCount === totalImages) {
-            loading.style.display = 'none';
-          }
-        };
-        img.onerror = () => {
-          loadedCount++;
-          console.warn(فشل تحميل الصورة: ${url});
-          if (loadedCount === totalImages) {
-            loading.style.display = 'none';
-          }
-        };
-        
-        slider.appendChild(img);
-      });
+    function showNextSlide() {
+      index++;
+      if (index >= images.length) index = 0;
+      slides.style.transform = translateX(-${index * 100}%);
     }
 
-    function initializeSlider() {
-      const slider = document.getElementById('imageSlider');
-      const images = document.querySelectorAll('#imageSlider img');
-      const sliderNav = document.getElementById('sliderNav');
-      
-      if (!slider || images.length === 0 || !sliderNav) {
-        console.log('لم يتم العثور على عناصر السلايدر');
-        return;
-      }
-
-      let currentIndex = 0;
-      let slideInterval;
-
-      // إنشاء نقاط التنقل
-      images.forEach((_, index) => {
-        const dot = document.createElement('div');
-        dot.classList.add('slider-dot');
-        if (index === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => goToSlide(index));
-        sliderNav.appendChild(dot);
-      });
-
-      function goToSlide(index) {
-        currentIndex = index;
-        updateSlider();
-        resetInterval();
-      }
-
-      function updateSlider() {
-        slider.style.transform = translateX(-${currentIndex * 100}%);
-        
-        document.querySelectorAll('.slider-dot').forEach((dot, index) => {
-          dot.classList.toggle('active', index === currentIndex);
-        });
-      }
-
-      function nextSlide() {
-        currentIndex = (currentIndex + 1) % images.length;
-        updateSlider();
-      }
-
-      function resetInterval() {
-        clearInterval(slideInterval);
-        slideInterval = setInterval(nextSlide, 4000);
-      }
-
-      // بدء السلايدر
-      resetInterval();
-
-      // إيقاف السلايدر عند التمرير
-      slider.addEventListener('mouseenter', () => clearInterval(slideInterval));
-      slider.addEventListener('mouseleave', resetInterval);
-    }
+    setInterval(showNextSlide, 3000);
   </script>
+
 </body>
 </html>
