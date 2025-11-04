@@ -1,334 +1,290 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تطبيق طبيبي</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>طبيبي — تطبيق حجز المواعيد</title>
+
+  <!-- favicon -->
   <link rel="icon" href="https://raw.githubusercontent.com/TabibySY/tabiby/main/logo.jpg" type="image/jpg">
+
+  <!-- أيقونات -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+  <meta name="description" content="طبيبي تطبيق سوري لحجز المواعيد لدى الأطباء، استعراض الأطباء حسب المحافظة والتخصص، وقراءة مقالات طبية.">
+  <meta property="og:title" content="تطبيق طبيبي">
+  <meta property="og:description" content="طبيبي — حجز المواعيد بسهولة في سوريا">
+  <meta property="og:image" content="https://raw.githubusercontent.com/TabibySY/tabiby/main/logo.jpg">
+  <meta property="og:url" content="https://tabibysy.github.io/tabiby/">
+
   <style>
-    body {
-      font-family: "Tajawal", sans-serif;
-      direction: rtl;
-      text-align: center;
-      margin: 0;
-      background: linear-gradient(rgba(255,255,255,0.9), rgba(240,255,240,0.9)),
-                  url('https://img.freepik.com/free-photo/medical-banner-with-stethoscope_23-2149611199.jpg');
-      background-size: cover;
-      background-attachment: fixed;
-      color: #333;
+    :root{
+      --accent: #28a745;
+      --whatsapp: #25D366;
+      --muted: #586069;
+      --card-bg: rgba(255,255,255,0.9);
+      --max-width: 980px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%; margin:0; font-family: "Tajawal", system-ui, sans-serif; direction:rtl; color:#24343a}
+    body{
+      background-image:
+        linear-gradient(180deg, rgba(255,255,255,0.88), rgba(240,255,250,0.92)),
+        url("https://images.unsplash.com/photo-1580281657527-5f8f6d2d7a2d?auto=format&fit=crop&w=1600&q=60");
+      background-size:cover;
+      background-position:center;
+      padding:28px;
+      display:flex;
+      justify-content:center;
     }
 
-    header img {
-      width: 120px;
-      margin-top: 20px;
-      border-radius: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    .wrap{
+      width:100%;
+      max-width:var(--max-width);
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.98));
+      border-radius:14px;
+      box-shadow:0 12px 30px rgba(15,30,40,0.12);
+      padding:20px;
+      backdrop-filter: blur(4px);
     }
 
-    h1 {
-      color: #007f5f;
-      margin-top: 15px;
+    /* header */
+    .top {
+      display:flex;
+      gap:16px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .logo{
+      width:84px; height:84px; flex:0 0 84px; border-radius:12px; overflow:hidden; background:#fff;
+      box-shadow:0 8px 18px rgba(0,0,0,0.06);
+    }
+    .logo img{width:100%; height:100%; object-fit:cover; display:block}
+    .hero h1{margin:0; font-size:20px; color:var(--accent)}
+    .lead{margin:6px 0 0; color:var(--muted); font-size:14px; line-height:1.45; max-width:800px}
+
+    /* actions */
+    .actions{margin-top:14px; display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+    .download-btn{
+      background:var(--accent); color:#fff; padding:10px 16px; border-radius:10px; text-decoration:none; font-weight:700;
+      box-shadow:0 8px 20px rgba(40,160,80,0.12);
+      transition:transform .12s, box-shadow .12s;
+    }
+    .download-btn:hover{transform:translateY(-3px); box-shadow:0 18px 40px rgba(40,160,80,0.16)}
+
+    .alt-btn{
+      background:linear-gradient(90deg,#4aa3ff,#2a8bff); color:#fff; padding:10px 14px; border-radius:10px; text-decoration:none; font-weight:700;
     }
 
-    p.description {
-      width: 90%;
-      max-width: 600px;
-      margin: 10px auto 30px;
-      font-size: 17px;
-      line-height: 1.7;
+    .support{
+      display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-left:8px;
+      font-size:14px; color:var(--muted)
     }
+    .support a{display:inline-flex; gap:8px; align-items:center; padding:6px 8px; border-radius:8px; text-decoration:none; color:inherit; background:rgba(255,255,255,0.7); box-shadow:inset 0 -1px 0 rgba(255,255,255,0.6)}
+    .support a.wa{background:linear-gradient(90deg,var(--whatsapp),#16b14a); color:#fff}
+    .support a.mail{background:linear-gradient(90deg,#f6fbff,#eaf6ff); color:#145a86}
 
-    a.download-btn, a.contact-btn {
-      display: inline-block;
-      background-color: #28a745;
-      color: white;
-      padding: 12px 25px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 18px;
-      transition: 0.3s;
-      margin-top: 10px;
-    }
+    hr{border:0; height:1px; background:linear-gradient(90deg,transparent,#e6f1ec,transparent); margin:20px 0}
 
-    a.download-btn:hover, a.contact-btn:hover {
-      background-color: #218838;
-      transform: scale(1.05);
-    }
+    /* layout */
+    .main-row{display:flex; gap:20px; align-items:flex-start; margin-top:18px; flex-wrap:wrap}
+    .slider-card{flex:1 1 420px; min-width:260px; max-width:680px}
+    .info{width:280px; min-width:220px; background:rgba(255,255,255,0.93); border-radius:12px; padding:14px; box-shadow:0 8px 20px rgba(0,0,0,0.04); font-size:14px; color:var(--muted)}
 
-    /* ✨ تأثير النبض للزر */
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(40,167,69, 0.6); }
-      70% { box-shadow: 0 0 0 15px rgba(40,167,69, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(40,167,69, 0); }
-    }
-
-    .contact-btn {
-      animation: pulse 3s infinite;
-    }
-
-    .support {
-      margin-top: 20px;
-      font-size: 16px;
-    }
-
-    .support a {
-      color: #007f5f;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    /* سلايدر الصور */
+    /* slider (JS-based) */
     .slider {
-      position: relative;
-      max-width: 350px;
-      margin: 40px auto;
-      overflow: hidden;
-      border-radius: 20px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      position:relative;
+      width:100%;
+      max-width:420px;
+      height:250px; /* small size as requested */
+      border-radius:12px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow:0 8px 24px rgba(0,0,0,0.08);
     }
-
-    .slides {
-      display: flex;
-      transition: transform 1s ease-in-out;
-      width: 100%;
+    .slides-inner{
+      display:flex;
+      height:100%;
+      transition:transform .6s ease;
+      will-change:transform;
     }
-
-    .slides img {
-      width: 100%;
-      border-radius: 20px;
+    .slides-inner img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      flex:0 0 100%;
+      display:block;
     }
+    .dots{display:flex; gap:8px; justify-content:center; margin-top:10px}
+    .dot{width:10px; height:10px; border-radius:50%; background:#d0d7db; cursor:pointer}
+    .dot.active{background:var(--accent)}
 
-    /* قسم المميزات */
-    .features {
-      background-color: #e9f7ef;
-      padding: 40px 20px;
-      border-top: 2px solid #cce3de;
-      border-bottom: 2px solid #cce3de;
-    }
+    /* features */
+    .features{background:#e8f8f1; padding:28px; border-radius:12px; margin-top:22px}
+    .features h2{margin:0 0 10px; color:var(--accent)}
+    .feature-item{display:flex; gap:10px; align-items:center; justify-content:center; margin:10px 0; color:#234; font-size:15px}
+    .feature-item i{color:var(--accent); font-size:20px}
 
-    .features h2 {
-      color: #007f5f;
-      margin-bottom: 30px;
-      font-size: 24px;
-    }
+    /* footer social spacing 20px between icons */
+    footer{margin-top:22px; text-align:center; color:var(--muted); font-size:13px}
+    .footer-social{display:flex; justify-content:center; gap:20px; margin-bottom:8px}
+    .footer-social a{font-size:20px; text-decoration:none; color:inherit}
 
-    .feature-item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      font-size: 18px;
-      color: #333;
-    }
-
-    .feature-item i {
-      color: #28a745;
-      margin-left: 10px;
-      font-size: 22px;
-    }
-
-    /* الفوتر */
-    footer {
-      margin-top: 40px;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.85);
-      border-top: 2px solid #cce3de;
-    }
-
-    footer .social {
-      margin-bottom: 10px;
-    }
-
-    footer .social a {
-      color: #007f5f;
-      font-size: 24px;
-      margin: 0 10px;
-      transition: 0.3s;
-    }
-
-    footer .social a:hover {
-      color: #25D366;
-    }
-
-    footer p {
-      font-size: 14px;
-      color: #555;
+    @media (max-width:900px){
+      .main-row{flex-direction:column-reverse}
+      .info{width:100%}
+      .slider{max-width:100%}
     }
   </style>
 </head>
-
 <body>
+  <div class="wrap" role="main">
+    <div class="top">
+      <div class="logo" aria-hidden="true">
+        <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/logo.jpg" alt="شعار طبيبي">
+      </div>
 
-  <header>
-    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/logo.jpg" alt="شعار طبيبي">
-    <h1>مرحبًا بك في تطبيق طبيبي</h1>
-    <p class="description">
-      طبيبي هو تطبيق طبي سوري يتيح لك حجز المواعيد بسهولة مع الأطباء في مختلف المحافظات. 
-      يمكنك استعراض قائمة الأطباء حسب التخصص والموقع، قراءة المقالات الطبية، 
-      والاطلاع على الإعلانات الصحية لتبقى على اطلاع دائم وتوفر وقتك وجهدك في البحث عن الطبيب المناسب.
-    </p>
-  </header>
+      <div class="hero" style="flex:1">
+        <h1>تطبيق طبيبي — حجز مواعيد الأطباء في سوريا</h1>
+        <p class="lead">
+          طبيبي هو تطبيق سوري يسهّل عليك حجز المواعيد عند الأطباء في مختلف المحافظات.
+          يعرض قوائم الأطباء حسب التخصص والموقع، يوفر مقالات طبية وإعلانات صحية، ويتيح إدارة الحجوزات بسهولة.
+        </p>
 
-  <a href="https://raw.githubusercontent.com/TabibySY/tabiby/main/apk.apk" 
-     download class="download-btn">
-     تحميل تطبيق طبيبي
-  </a>
+        <div class="actions">
+          <a class="download-btn" href="https://raw.githubusercontent.com/TabibySY/tabiby/main/apk.apk" download>تحميل تطبيق طبيبي (أندرويد)</a>
+          <!-- زر بديل (ضع رابط Google Drive هنا لاحقاً) -->
+          <a class="alt-btn" href="#" id="altDownload">تحميل بديل (Google Drive)</a>
 
-  <div class="support">
-    <p>في حال واجهت أي مشكلة في التحميل، يمكنك التواصل مع الدعم مباشرة عبر:</p>
-    <p>
-      <i class="fab fa-whatsapp" style="color:#25D366;"></i>
-      <a href="https://wa.me/963988343069" target="_blank">واتساب: 0988343069</a>
-    </p>
-    <p>
-      <i class="fas fa-envelope" style="color:#007bff;"></i>
-      <a href="mailto:tbyby229@gmail.com">tbyby229@gmail.com</a>
-    </p>
-  </div>
-<!-- سلايدر الصور -->
-<style>
-  .slider {
-    position: relative;
-    width: 90%;
-    max-width: 300px;
-    margin: 30px auto;
-    overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    height: 250px;
-  }
+          <div class="support" aria-label="معلومات الدعم">
+            <a class="wa" href="https://wa.me/963988343069" target="_blank" rel="noopener noreferrer" title="الدعم عبر واتساب">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M20.52 3.48A11.9 11.9 0 0012 0C5.373 0 .01 5.37.01 12a11.91 11.91 0 001.71 5.93L0 24l6.23-1.64A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12 0-3.19-1.24-6.18-3.48-8.52z" fill="#25D366"/><path d="M17.2 14.07c-.31-.16-1.82-.9-2.1-1-.28-.12-.48-.16-.68.16s-.78 1-.96 1.2c-.17.2-.34.23-.64.08-.3-.16-1.26-.46-2.39-1.48-.88-.78-1.48-1.74-1.65-2.04-.18-.3-.02-.46.14-.62.14-.14.3-.36.45-.54.15-.18.2-.3.3-.5.1-.2 0-.38-.05-.54-.06-.16-.68-1.63-.93-2.22-.24-.58-.49-.5-.68-.51l-.58-.01c-.2 0-.52.07-.8.33-.28.26-1.06 1.04-1.06 2.53 0 1.5 1.09 2.95 1.24 3.15.16.2 2.15 3.38 5.21 4.73 3.06 1.36 3.06 0.91 3.61 0.85.55-.06 1.83-.74 2.09-1.46.27-.72.27-1.34.19-1.46-.08-.13-.28-.2-.6-.36z" fill="#fff"/></svg>
+              واتساب
+            </a>
 
-  .slides {
-    display: flex;
-    width: calc(100% * 9);
-    animation: slideAnimation 36s infinite;
-  }
-
-  .slides img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 12px;
-  }
-
-  @keyframes slideAnimation {
-    0%, 11% { transform: translateX(0%); }
-    12.5%, 23.5% { transform: translateX(-100%); }
-    25%, 36% { transform: translateX(-200%); }
-    37.5%, 48.5% { transform: translateX(-300%); }
-    50%, 61% { transform: translateX(-400%); }
-    62.5%, 73.5% { transform: translateX(-500%); }
-    75%, 86% { transform: translateX(-600%); }
-    87.5%, 98.5% { transform: translateX(-700%); }
-    100% { transform: translateX(-800%); }
-  }
-
-  /* النقاط السفلية */
-  .dots {
-    text-align: center;
-    margin-top: 10px;
-  }
-
-  .dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    margin: 0 4px;
-    background-color: #ccc;
-    border-radius: 50%;
-    transition: background-color 0.3s;
-  }
-
-  .dot.active {
-    background-color: #28a745;
-  }
-
-  @media (max-width: 480px) {
-    .slider {
-      max-width: 90%;
-      height: 200px;
-    }
-  }
-</style>
-  
-<div class="slider">
-  <div class="slides" id="slides">
-    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot1.jpg" alt="تسجيل الدخول">
-    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot2.jpg" alt="إنشاء حساب">
-    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot3.jpg" alt="مقالات طبية">
-    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot4.jpg" alt="اختيار المحافظة">
-    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot5.jpg" alt="اختيار الطبيب">
-    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot6.jpg" alt="موعد الحجز">
-    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot7.jpg" alt="الحجوزات الحالية">
-    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot8.jpg" alt="الحجوزات السابقة">
-    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot9.jpg" alt="الإعدادات">
-  </div>
-</div>
-
-<div class="dots" id="dots">
-  <span class="dot active"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-</div>
-
-<script>
-  // تحريك النقاط حسب الصورة المعروضة
-  const dots = document.querySelectorAll('.dot');
-  let index = 0;
-
-  setInterval(() => {
-    dots.forEach(dot => dot.classList.remove('active'));
-    dots[index].classList.add('active');
-    index = (index + 1) % dots.length;
-  }, 4000); // كل 4 ثواني تنتقل للنقطة التالية
-</script>
-
-  <!-- قسم المميزات -->
-  <section class="features">
-    <h2>مميزات تطبيق طبيبي</h2>
-    <div class="feature-item"><i class="fas fa-calendar-check"></i> حجز المواعيد بسهولة وسرعة.</div>
-    <div class="feature-item"><i class="fas fa-user-md"></i> اختيار الطبيب حسب المحافظة والتخصص.</div>
-    <div class="feature-item"><i class="fas fa-bell"></i> تنبيهات وتذكيرات بمواعيدك القادمة.</div>
-    <div class="feature-item"><i class="fas fa-notes-medical"></i> مقالات طبية وإعلانات صحية مفيدة.</div>
-
-    <a href="https://wa.me/963988343069" target="_blank" class="contact-btn">
-      <i class="fab fa-whatsapp"></i> تواصل معنا الآن
-    </a>
-  </section>
-
-  <footer>
-    <div class="social">
-      <a href="https://www.facebook.com/share/1BPYmKJrdX/" target="_blank"><i class="fab fa-facebook"></i></a>
-      <a href="https://www.instagram.com/tabiby_syr?igsh=YTRjYnFoZ2tqNzR6" target="_blank" style="margin-right:20px;"><i class="fab fa-instagram"></i></a>
+            <a class="mail" href="mailto:tbyby229@gmail.com" title="إرسال إيميل">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M2 6.5A2.5 2.5 0 014.5 4h15A2.5 2.5 0 0122 6.5v11A2.5 2.5 0 0119.5 20h-15A2.5 2.5 0 012 17.5v-11z" fill="#eaf6ff"/><path d="M3.5 6.8v10.7c0 .83.67 1.5 1.5 1.5h14c.83 0 1.5-.67 1.5-1.5V6.8l-8 4.6-8-4.6z" fill="#145a86"/></svg>
+              tbyby229@gmail.com
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-    <p>جميع الحقوق محفوظة © 2025 تطبيق طبيبي</p>
-  </footer>
+
+    <hr>
+
+    <div class="main-row">
+      <div class="slider-card">
+        <div class="slider" id="slider">
+          <div class="slides-inner" id="slidesInner">
+            <!-- تأكد أن هذه الروابط تعمل كـ RAW على GitHub -->
+            <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot1.jpg" alt="تسجيل الدخول">
+            <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot2.jpg" alt="إنشاء حساب">
+            <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot3.jpg" alt="مقالات طبية">
+            <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot4.jpg" alt="اختيار المحافظة">
+            <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot5.jpg" alt="اختيار الطبيب">
+            <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot6.jpg" alt="موعد الحجز">
+            <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot7.jpg" alt="الحجوزات الحالية">
+            <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot8.jpg" alt="الحجوزات السابقة">
+            <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot9.jpg" alt="الإعدادات">
+          </div>
+        </div>
+
+        <div class="dots" id="dotsContainer" role="tablist" aria-label="مؤشرات الصور" style="margin-top:8px"></div>
+      </div>
+
+      <aside class="info" aria-label="مميزات التطبيق">
+        <h3 style="margin-top:0">لماذا تختار طبيبي؟</h3>
+        <ul style="padding-left:18px; text-align:right; color:var(--muted);">
+          <li>سهولة وسرعة في حجز المواعيد مع الأطباء في جميع المحافظات.</li>
+          <li>عرض الأطباء حسب التخصص والموقع مع معلومات الاتصال.</li>
+          <li>مقالات طبية موثوقة تُبقيك على اطلاع صحي.</li>
+          <li>إدارة الحجوزات وعرض السجل مع تذكيرات وتنبيهات.</li>
+        </ul>
+
+        <div style="margin-top:14px; font-size:13px; color:var(--muted)">
+          <strong>ملاحظة:</strong> قد يظهر تحذير عند التحميل لأن الملف خارج متجر Google Play. التطبيق موقّع من المطوّر.
+        </div>
+      </aside>
+    </div>
+
+    <!-- مميزات بلون مميز -->
+    <section class="features">
+      <h2>مميزات تطبيق طبيبي</h2>
+      <div class="feature-item"><i class="fas fa-calendar-check"></i><span>حجز المواعيد بسهولة</span></div>
+      <div class="feature-item"><i class="fas fa-map-marker-alt"></i><span>بحث حسب المحافظة والتخصص</span></div>
+      <div class="feature-item"><i class="fas fa-newspaper"></i><span>مقالات وإعلانات صحية</span></div>
+      <div class="feature-item"><i class="fas fa-bell"></i><span>تنبيهات وتذكيرات بالمواعيد</span></div>
+    </section>
+
+    <footer>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/share/1BPYmKJrdX/" target="_blank" class="facebook" title="فيسبوك"><i class="fab fa-facebook" style="color:#1877f2"></i></a>
+        <a href="https://www.instagram.com/tabiby_syr?igsh=YTRjYnFoZ2tqNzR6" target="_blank" class="instagram" title="انستغرام"><i class="fab fa-instagram" style="color:#e4405f"></i></a>
+        <a href="https://wa.me/963988343069" target="_blank" class="whatsapp" title="واتساب"><i class="fab fa-whatsapp" style="color:#25D366"></i></a>
+      </div>
+      <div>جميع الحقوق محفوظة © 2025 تطبيق طبيبي</div>
+    </footer>
+  </div>
 
   <script>
-    // كود السلايدر التلقائي
-    const slides = document.querySelector('.slides');
-    const images = document.querySelectorAll('.slides img');
-    let index = 0;
+    // Slider JS: autoplay, clickable dots, pause on hover
+    (function(){
+      const slidesInner = document.getElementById('slidesInner');
+      const slides = Array.from(slidesInner.querySelectorAll('img'));
+      const dotsContainer = document.getElementById('dotsContainer');
+      const slideCount = slides.length;
+      let idx = 0, timer = null;
+      const interval = 4000;
 
-    function showNextSlide() {
-      index++;
-      if (index >= images.length) index = 0;
-      slides.style.transform = `translateX(-${index * 100}%)`;
-    }
+      // build dots
+      for(let i=0;i<slideCount;i++){
+        const d = document.createElement('button');
+        d.className = 'dot';
+        d.type = 'button';
+        d.setAttribute('aria-label', 'الصورة ' + (i+1));
+        d.addEventListener('click', ()=> { show(i); restart(); });
+        dotsContainer.appendChild(d);
+      }
+      const dots = Array.from(dotsContainer.children);
 
-    setInterval(showNextSlide, 3000);
+      function show(i){
+        idx = (i + slideCount) % slideCount;
+        slidesInner.style.transform = `translateX(-${idx * 100}%)`;
+        dots.forEach(d=>d.classList.remove('active'));
+        dots[idx].classList.add('active');
+      }
+
+      function next(){ show(idx+1); }
+      function start(){ if(timer) clearInterval(timer); timer = setInterval(next, interval); }
+      function stop(){ if(timer) { clearInterval(timer); timer = null; } }
+      function restart(){ stop(); start(); }
+
+      // pause on hover (desktop)
+      const sliderEl = document.getElementById('slider');
+      sliderEl.addEventListener('mouseenter', stop);
+      sliderEl.addEventListener('mouseleave', start);
+
+      // init
+      show(0);
+      start();
+
+      // accessibility: keyboard nav
+      document.addEventListener('keydown', (e)=>{
+        if(e.key === 'ArrowLeft'){ show(idx-1); restart(); }
+        if(e.key === 'ArrowRight'){ show(idx+1); restart(); }
+      });
+
+      // alt-download placeholder notice: if user wants, replace href '#'
+      document.getElementById('altDownload').addEventListener('click', function(e){
+        if(this.href.endsWith('#')) {
+          e.preventDefault();
+          alert('ضع رابط Google Drive أو رابط بديل للتحميل في زر "تحميل بديل".');
+        }
+      });
+
+    })();
   </script>
-
 </body>
 </html>
-
-
 
