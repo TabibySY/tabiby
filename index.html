@@ -192,47 +192,69 @@
   .slider {
     position: relative;
     width: 90%;
-    max-width: 400px;
+    max-width: 300px;
     margin: 30px auto;
     overflow: hidden;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    height: 250px;
   }
 
   .slides {
     display: flex;
-    width: 900%;
+    width: calc(100% * 9);
     animation: slideAnimation 36s infinite;
   }
 
   .slides img {
     width: 100%;
-    border-radius: 15px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
   }
 
   @keyframes slideAnimation {
-    0%   { transform: translateX(0%); }
-    11%  { transform: translateX(0%); }
-    12.5% { transform: translateX(-100%); }
-    23.5% { transform: translateX(-100%); }
-    25% { transform: translateX(-200%); }
-    36% { transform: translateX(-200%); }
-    37.5% { transform: translateX(-300%); }
-    48.5% { transform: translateX(-300%); }
-    50% { transform: translateX(-400%); }
-    61% { transform: translateX(-400%); }
-    62.5% { transform: translateX(-500%); }
-    73.5% { transform: translateX(-500%); }
-    75% { transform: translateX(-600%); }
-    86% { transform: translateX(-600%); }
-    87.5% { transform: translateX(-700%); }
-    98.5% { transform: translateX(-700%); }
+    0%, 11% { transform: translateX(0%); }
+    12.5%, 23.5% { transform: translateX(-100%); }
+    25%, 36% { transform: translateX(-200%); }
+    37.5%, 48.5% { transform: translateX(-300%); }
+    50%, 61% { transform: translateX(-400%); }
+    62.5%, 73.5% { transform: translateX(-500%); }
+    75%, 86% { transform: translateX(-600%); }
+    87.5%, 98.5% { transform: translateX(-700%); }
     100% { transform: translateX(-800%); }
+  }
+
+  /* النقاط السفلية */
+  .dots {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin: 0 4px;
+    background-color: #ccc;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+  }
+
+  .dot.active {
+    background-color: #28a745;
+  }
+
+  @media (max-width: 480px) {
+    .slider {
+      max-width: 90%;
+      height: 200px;
+    }
   }
 </style>
 
 <div class="slider">
-  <div class="slides">
+  <div class="slides" id="slides">
     <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot1.jpg" alt="تسجيل الدخول">
     <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot2.jpg" alt="إنشاء حساب">
     <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot3.jpg" alt="مقالات طبية">
@@ -245,6 +267,29 @@
   </div>
 </div>
 
+<div class="dots" id="dots">
+  <span class="dot active"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+</div>
+
+<script>
+  // تحريك النقاط حسب الصورة المعروضة
+  const dots = document.querySelectorAll('.dot');
+  let index = 0;
+
+  setInterval(() => {
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[index].classList.add('active');
+    index = (index + 1) % dots.length;
+  }, 4000); // كل 4 ثواني تنتقل للنقطة التالية
+</script>
 
   <!-- قسم المميزات -->
   <section class="features">
