@@ -22,7 +22,6 @@
       background-size: cover;
       background-attachment: scroll;
       color: #333;
-      scroll-behavior: smooth;
     }
 
     header img {
@@ -86,14 +85,16 @@
 
     .slides {
       display: flex;
-      transition: transform 0.5s ease-in-out, opacity 1s ease-in-out;
+      transition: transform 0.5s ease-in-out;
       width: 100%;
     }
 
     .slides img {
       width: 100%;
+      height: auto;
       border-radius: 20px;
       flex-shrink: 0;
+      display: block;
     }
 
     .slider button {
@@ -108,6 +109,7 @@
       cursor: pointer;
       font-size: 18px;
       transition: 0.3s;
+      z-index: 10;
     }
 
     .slider button:hover {
@@ -159,14 +161,6 @@
       background-color: #f0fff4;
       padding: 30px 20px;
       margin-top: 40px;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s ease-in-out;
-    }
-
-    .testimonials.visible {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     .testimonials h2 {
@@ -180,6 +174,14 @@
       font-size: 16px;
       font-style: italic;
       color: #333;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-in-out;
+    }
+
+    .testimonials p.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* زر تواصل معنا */
@@ -243,7 +245,7 @@
 <body>
 
   <header>
-    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/logo.jpg" alt="شعار طبيبي" loading="lazy">
+    <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/logo.jpg" alt="شعار طبيبي">
     <h1>مرحبًا بك في تطبيق طبيبي</h1>
     <p class="description">
       طبيبي هو تطبيق طبي سوري يتيح لك حجز المواعيد بسهولة مع الأطباء في مختلف المحافظات. 
@@ -272,4 +274,59 @@
   <!-- سلايدر الصور -->
   <div class="slider">
     <div class="slides">
-      <img s
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot1.jpg" alt="تسجيل الدخول" loading="lazy">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot2.jpg" alt="إنشاء حساب" loading="lazy">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot3.jpg" alt="مقالات طبية" loading="lazy">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot4.jpg" alt="اختيار المحافظة" loading="lazy">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot5.jpg" alt="اختيار الطبيب" loading="lazy">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot6.jpg" alt="موعد الحجز" loading="lazy">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot7.jpg" alt="الحجوزات الحالية" loading="lazy">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot8.jpg" alt="الحجوزات السابقة" loading="lazy">
+      <img src="https://raw.githubusercontent.com/TabibySY/tabiby/main/Screenshot9.jpg" alt="الإعدادات" loading="lazy">
+    </div>
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+  </div>
+
+  <!-- قسم المميزات -->
+  <section class="features">
+    <h2>مميزات تطبيق طبيبي</h2>
+
+    <div class="feature-item">
+      <i class="fas fa-calendar-check"></i>
+      <span>حجز المواعيد بسهولة وسرعة مع الأطباء في مختلف المحافظات.</span>
+    </div>
+
+    <div class="feature-item">
+      <i class="fas fa-search-location"></i>
+      <span>بحث ذكي حسب التخصص والموقع لاختيار الطبيب الأنسب لك.</span>
+    </div>
+
+    <div class="feature-item">
+      <i class="fas fa-newspaper"></i>
+      <span>مقالات طبية وإعلانات صحية لتبقى على اطلاع دائم.</span>
+    </div>
+
+    <div class="feature-item">
+      <i class="fas fa-bell"></i>
+      <span>تنبيهات وتذكيرات بالمواعيد لضمان عدم نسيان حجوزاتك.</span>
+    </div>
+  </section>
+
+  <!-- قسم المراجعات -->
+  <section class="testimonials">
+    <h2>آراء مستخدمينا</h2>
+    <p>"تطبيق رائع سهل الاستخدام وسريع!" – أحمد</p>
+    <p>"الواجهة بسيطة والمواعيد تتم بسهولة" – ليلى</p>
+    <p>"أنصح الجميع باستخدام طبيبي لتوفير الوقت والجهد." – سامي</p>
+  </section>
+
+  <!-- زر تواصل معنا -->
+  <a href="https://wa.me/963988343069" target="_blank" rel="noopener" class="contact-btn">تواصل معنا</a>
+
+  <!-- الفوتر -->
+  <footer>
+    <div class="social">
+      <a href="https://www.facebook.com/share/1BPYmKJrdX/" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
+      <
+
